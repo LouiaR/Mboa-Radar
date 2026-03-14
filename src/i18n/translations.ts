@@ -90,9 +90,13 @@ export const translations = {
       request_access: "Request access"
     },
     stats: {
+      title: "Your Statistics",
+      description: "Track your reports, verifications, and overall contribution to the community.",
       coming_soon: "Stats coming soon"
     },
     profile: {
+      title: "User Profile",
+      description: "Manage your account settings, view your contribution history, and customize your radar preferences.",
       go_to_login: "Go to Login"
     },
     errors: {
@@ -193,9 +197,13 @@ export const translations = {
       request_access: "Demander l'accès"
     },
     stats: {
+      title: "Vos Statistiques",
+      description: "Suivez vos signalements, vos vérifications et votre contribution globale à la communauté.",
       coming_soon: "Statistiques à venir"
     },
     profile: {
+      title: "Profil Utilisateur",
+      description: "Gérez les paramètres de votre compte, consultez votre historique de contributions et personnalisez vos préférences radar.",
       go_to_login: "Aller à la connexion"
     },
     errors: {

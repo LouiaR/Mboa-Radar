@@ -99,19 +99,20 @@ export default function PlanRoutePage() {
   };
 
   return (
-    <div className="relative flex min-h-screen w-full flex-col max-w-md mx-auto bg-background-dark shadow-2xl overflow-x-hidden">
-      <header className="flex items-center p-4 justify-between sticky top-0 z-[1000] bg-background-dark/80 backdrop-blur-md border-b border-primary/10">
-        <button 
-          onClick={() => navigate(-1)}
-          className="flex size-10 shrink-0 items-center justify-center rounded-full hover:bg-primary/10 transition-colors"
-        >
-          <ArrowLeft size={24} className="text-slate-100" />
-        </button>
-        <h2 className="text-slate-100 text-lg font-bold leading-tight tracking-tight flex-1 text-center pr-10">{t('plan.title')}</h2>
-      </header>
+    <div className="relative flex min-h-screen w-full flex-col md:flex-row bg-background-dark shadow-2xl overflow-hidden">
+      {/* Sidebar / Top Panel */}
+      <div className="flex flex-col w-full md:w-96 md:border-r border-primary/10 bg-background-dark z-[1000] shadow-lg md:h-screen shrink-0">
+        <header className="flex items-center p-4 justify-between bg-background-dark/80 backdrop-blur-md border-b border-primary/10">
+          <button 
+            onClick={() => navigate(-1)}
+            className="flex size-10 shrink-0 items-center justify-center rounded-full hover:bg-primary/10 transition-colors"
+          >
+            <ArrowLeft size={24} className="text-slate-100" />
+          </button>
+          <h2 className="text-slate-100 text-lg font-bold leading-tight tracking-tight flex-1 text-center pr-10">{t('plan.title')}</h2>
+        </header>
 
-      <main className="flex-1 flex flex-col">
-        <section className="p-4 space-y-4 bg-background-dark z-[1000] shadow-lg">
+        <section className="p-4 space-y-4 flex-1 overflow-y-auto">
           <div className="flex flex-col gap-3">
             <div className="flex flex-col w-full relative">
               <p className="text-slate-300 text-xs font-semibold uppercase tracking-wider pb-1.5 ml-1">{t('plan.start_placeholder')}</p>
@@ -158,39 +159,40 @@ export default function PlanRoutePage() {
             </button>
           </div>
         </section>
+      </div>
 
-        <section className="flex-1 relative min-h-[400px] bg-slate-800 z-0">
-          <MapContainer 
-            center={startCoords || [4.0511, 9.7679]} 
-            zoom={13} 
-            zoomControl={false}
-            className="w-full h-full z-0 absolute inset-0"
-          >
-            <TileLayer
-              url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
-              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a>'
-            />
-            <MapController start={startCoords} end={endCoords} />
-            
-            {startCoords && <Marker position={startCoords} icon={startIcon} />}
-            {endCoords && <Marker position={endCoords} icon={endIcon} />}
-            {startCoords && endCoords && (
-              <Polyline 
-                positions={[startCoords, endCoords]} 
-                color="#f49d25" 
-                weight={4} 
-                dashArray="10, 10"
-              />
-            )}
-          </MapContainer>
+      {/* Map Area */}
+      <main className="flex-1 relative min-h-[50vh] md:min-h-screen bg-slate-800 z-0">
+        <MapContainer 
+          center={startCoords || [4.0511, 9.7679]} 
+          zoom={13} 
+          zoomControl={false}
+          className="w-full h-full z-0 absolute inset-0"
+        >
+          <TileLayer
+            url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a>'
+          />
+          <MapController start={startCoords} end={endCoords} />
           
+          {startCoords && <Marker position={startCoords} icon={startIcon} />}
+          {endCoords && <Marker position={endCoords} icon={endIcon} />}
           {startCoords && endCoords && (
-            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 bg-background-dark/90 backdrop-blur-md border border-primary/20 px-6 py-3 rounded-full shadow-2xl z-[1000] flex items-center gap-3">
-              <Route size={20} className="text-primary" />
-              <span className="text-slate-100 font-bold text-sm whitespace-nowrap">{t('plan.route_planned')}</span>
-            </div>
+            <Polyline 
+              positions={[startCoords, endCoords]} 
+              color="#f49d25" 
+              weight={4} 
+              dashArray="10, 10"
+            />
           )}
-        </section>
+        </MapContainer>
+        
+        {startCoords && endCoords && (
+          <div className="absolute bottom-6 left-1/2 -translate-x-1/2 bg-background-dark/90 backdrop-blur-md border border-primary/20 px-6 py-3 rounded-full shadow-2xl z-[1000] flex items-center gap-3">
+            <Route size={20} className="text-primary" />
+            <span className="text-slate-100 font-bold text-sm whitespace-nowrap">{t('plan.route_planned')}</span>
+          </div>
+        )}
       </main>
     </div>
   );

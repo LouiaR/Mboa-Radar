@@ -125,7 +125,7 @@ export default function MapPage() {
   return (
     <div className="relative flex h-full w-full flex-col overflow-hidden">
       {/* Top Header Overlay */}
-      <div className="absolute top-0 left-0 right-0 z-[1000] flex items-center bg-background-dark/80 backdrop-blur-md p-4 justify-between border-b border-primary/10">
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-2xl z-[1000] flex items-center bg-background-dark/80 backdrop-blur-md p-4 justify-between border-b border-primary/10 md:rounded-b-2xl">
         <div className="text-primary flex size-10 items-center justify-center rounded-lg hover:bg-primary/10 transition-colors cursor-pointer">
           <Menu size={24} />
         </div>
@@ -185,7 +185,7 @@ export default function MapPage() {
         </MapContainer>
 
         {/* Floating Map Controls */}
-        <div className="absolute right-4 top-24 z-[1000] flex flex-col gap-3">
+        <div className="absolute right-4 md:right-auto md:left-[calc(50%+300px)] top-24 z-[1000] flex flex-col gap-3">
           <button 
             onClick={handleRecenter}
             disabled={isLocating}
@@ -196,7 +196,7 @@ export default function MapPage() {
         </div>
 
         {/* Speed Indicator */}
-        <div className="absolute left-4 top-24 z-[1000]">
+        <div className="absolute left-4 md:left-auto md:right-[calc(50%+300px)] top-24 z-[1000]">
           <div className="flex flex-col items-center justify-center size-16 rounded-full bg-background-dark/90 backdrop-blur-md border-4 border-primary shadow-xl">
             <span className="text-xl font-black text-slate-100 leading-none">{speed}</span>
             <span className="text-[10px] font-bold text-primary uppercase">km/h</span>
@@ -204,7 +204,7 @@ export default function MapPage() {
         </div>
 
         {/* Bottom Sheet / Search Overlay */}
-        <div className="absolute bottom-0 left-0 right-0 z-[1000] px-4 pb-6 space-y-4 pointer-events-none">
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-2xl z-[1000] px-4 pb-6 space-y-4 pointer-events-none">
           {/* Filter Pills */}
           <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide pointer-events-auto">
             <div className="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-full bg-primary text-background-dark px-4 shadow-lg font-medium text-sm">
