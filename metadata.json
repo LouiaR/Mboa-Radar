@@ -1,0 +1,5 @@
+{
+  "name": "CamRoute Alert",
+  "description": "L'assistant communautaire pour une conduite sereine au Cameroun. Signalez les radars et les dangers hors-ligne.",
+  "requestFramePermissions": ["geolocation"]
+}
