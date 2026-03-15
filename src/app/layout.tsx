@@ -6,7 +6,15 @@ import '../index.css';
 
 export const metadata: Metadata = {
   title: 'CamRoute - Mboa Radar',
-  description: 'CamRoute Application',
+  description: 'CamRoute Application - Sécurité routière et radars au Cameroun',
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: 'black-translucent',
+    title: 'Mboa Radar',
+  },
+  other: {
+    'mobile-web-app-capable': 'yes',
+  }
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

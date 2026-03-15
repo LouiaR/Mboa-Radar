@@ -99,8 +99,11 @@ export default function ReportPage() {
         }, (err) => {
           console.error('Failed to get location', err);
           let errorMsg = t('plan.loc_error');
-          if (err.code === 1) errorMsg = t('errors.location_denied');
-          else if (err.code === 2) errorMsg = t('errors.location_unavailable');
+          if (err.code === 1) {
+            errorMsg = language === 'en'
+              ? "Location permission blocked. Please click the 'tune' icon in your browser's address bar to allow location and make accurate reports."
+              : "Permission de localisation bloquée. Veuillez cliquer sur l'icône de réglages à gauche de l'URL pour autoriser la position et faire des signalements précis.";
+          } else if (err.code === 2) errorMsg = t('errors.location_unavailable');
           else if (err.code === 3) errorMsg = t('errors.location_timeout');
           
           alert(errorMsg);

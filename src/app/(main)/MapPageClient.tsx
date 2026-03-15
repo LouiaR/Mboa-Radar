@@ -233,7 +233,15 @@ export default function MapPage() {
             setMapZoom(14);
           }
         },
-        (_err) => console.error("Geolocation error:", _err),
+        (err) => {
+          console.error("Geolocation error:", err);
+          if (err.code === 1) { // Permission Denied
+            alert(language === 'en' 
+              ? "Location permission blocked. Please click the 'tune' or 'lock' icon in your browser's address bar to reset permissions and see your position on the map."
+              : "La permission de localisation est bloquée. Veuillez cliquer sur l'icône de réglages (ou cadenas) à gauche de l'URL pour réinitialiser les permissions et voir votre position."
+            );
+          }
+        },
         { enableHighAccuracy: true, maximumAge: 10000, timeout: 5000 }
       );
     }
