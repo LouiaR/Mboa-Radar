@@ -1,3 +1,4 @@
+"use client";
 import React, { createContext, useState, useContext, useEffect } from 'react';
 import { translations, Language } from '../i18n/translations';
 
@@ -10,20 +11,30 @@ interface LanguageContextType {
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
 export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [language, setLanguage] = useState<Language>(() => {
-    const saved = localStorage.getItem('app_lang');
-    if (saved === 'en' || saved === 'fr') return saved;
-    
-    // Default to browser language
-    if (typeof navigator !== 'undefined' && navigator.language) {
-      const browserLang = navigator.language.toLowerCase();
-      if (browserLang.startsWith('en')) return 'en';
-    }
-    return 'fr'; // Default fallback
-  });
+  const [language, setLanguage] = useState<Language>('fr');
 
   useEffect(() => {
-    localStorage.setItem('app_lang', language);
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('app_lang');
+      if (saved === 'en' || saved === 'fr') {
+        setLanguage(saved);
+        return;
+      }
+      
+      // Default to browser language
+      if (typeof navigator !== 'undefined' && navigator.language) {
+        const browserLang = navigator.language.toLowerCase();
+        if (browserLang.startsWith('en')) {
+          setLanguage('en');
+        }
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('app_lang', language);
+    }
   }, [language]);
 
   const t = (key: string): string => {
